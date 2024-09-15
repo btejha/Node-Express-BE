@@ -2,7 +2,11 @@ import express from "express";
 import {MongoClient} from "mongodb";
 import path from 'path';
 import cors from 'cors';
+import {dirname} from 'path';
+import { fileURLToPath } from 'url';
 
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = dirname(__filename);
 async function start() {
     const url = `mongodb+srv://fsv-server:ABCD1234@cluster0.ijiuywy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
     const client = new MongoClient(url)
