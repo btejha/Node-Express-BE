@@ -1,6 +1,7 @@
 import express from "express";
 import {MongoClient} from "mongodb";
 import path from 'path';
+import cors from 'cors';
 
 async function start() {
     const url = `mongodb+srv://fsv-server:ABCD1234@cluster0.ijiuywy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
@@ -10,6 +11,7 @@ async function start() {
 
     const app = express();
     app.use(express.json());
+    app.use(cors());
 
     app.use('/images', express.static(path.join(__dirname, '../assets')))
 
@@ -63,7 +65,8 @@ async function start() {
         res.json(populatedCart);
     });
 
-    const server = app.listen(8000, () => {
+    const port = process.env.PORT || 8000
+    const server = app.listen(port, () => {
         console.log('Server is listening on port 8000')
     });
 
